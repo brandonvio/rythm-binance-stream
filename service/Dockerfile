@@ -1,4 +1,4 @@
-FROM python:3.8-slim-buster
+FROM 919217319840.dkr.ecr.us-west-2.amazonaws.com/python-38-slim-buster:latest
 
 WORKDIR /app
 COPY . .
