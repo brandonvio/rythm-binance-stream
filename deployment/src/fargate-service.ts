@@ -69,7 +69,7 @@ export class FargateService extends Construct {
             cluster: cluster,
             desiredCount: 1,
             assignPublicIp: true,
-            vpcSubnets: { subnets: props.vpc.isolatedSubnets },
+            vpcSubnets: { subnets: props.vpc.publicSubnets },
         })
     }
 }
