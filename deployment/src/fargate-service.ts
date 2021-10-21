@@ -23,6 +23,11 @@ export class FargateService extends Construct {
             cpu: '256',
             memoryMiB: '512',
         })
+        taskDef.executionRole?.addManagedPolicy(
+            iam.ManagedPolicy.fromAwsManagedPolicyName(
+                'AmazonDynamoDBFullAccess'
+            )
+        )
 
         const ecrRepo = ecr.Repository.fromRepositoryName(
             scope,
