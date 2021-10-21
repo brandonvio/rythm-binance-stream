@@ -11,7 +11,7 @@ phases:
       - npm install -g aws-cdk@next
       - export COMMIT_HASH=SV_$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - export IMAGE_TAG=${COMMIT_HASH:=latest}
-      - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 061973135686.dkr.ecr.us-west-2.amazonaws.com
+      - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 919217319840.dkr.ecr.us-west-2.amazonaws.com
   build:
     commands:
       # service
