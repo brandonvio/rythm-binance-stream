@@ -20,7 +20,7 @@ export class FargateService extends Construct {
 
         const execRole = new iam.Role(this, 'ExecRole', {
             roleName: 'rythm-exec-role',
-            assumedBy: new iam.ServicePrincipal('eecs-tasks.amazonaws.com'),
+            assumedBy: new iam.ServicePrincipal('ecs-tasks.amazonaws.com'),
         })
 
         execRole.addManagedPolicy(
