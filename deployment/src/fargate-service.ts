@@ -36,14 +36,15 @@ export class FargateService extends Construct {
         )
 
         const logGroup = new logs.LogGroup(this, 'LogGroup', {
-            logGroupName: `${props.serviceName}-lg`,
+            logGroupName: `/rythm/ecs/${props.serviceName}-lg`,
             retention: logs.RetentionDays.FIVE_DAYS,
+            removalPolicy: cdk.RemovalPolicy.DESTROY,
         })
 
         const container = taskDef.addContainer('Container', {
             image: containerImage,
             logging: ecs.LogDriver.awsLogs({
-                streamPrefix: '/ecs/rythm',
+                streamPrefix: 'rythm',
                 logGroup: logGroup,
             }),
         })
