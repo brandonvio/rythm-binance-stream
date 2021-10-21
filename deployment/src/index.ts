@@ -3,10 +3,16 @@ import 'source-map-support/register'
 import * as cdk from 'aws-cdk-lib'
 import { RythmBinanceStreamStack } from './service-stack'
 
+const IMAGE_TAG = process.env['IMAGE_TAG']
+if (!IMAGE_TAG) {
+    throw new Error('IMAGE_TAG environment variable must be set.')
+}
+
 const app = new cdk.App()
 new RythmBinanceStreamStack(app, 'RythmBinanceStreamStack', {
     stackName: 'rythm-binance-stream-stack',
     env: { account: '919217319840', region: 'us-west-2' },
+    imageTag: IMAGE_TAG,
     /* If you don't specify 'env', this stack will be environment-agnostic.
      * Account/Region-dependent features and context lookups will not work,
      * but a single synthesized template can be deployed anywhere. */

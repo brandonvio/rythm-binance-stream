@@ -10,7 +10,7 @@ phases:
       - project_name=rythm-binance-stream
       - npm install -g aws-cdk@next
       - COMMIT_HASH=SV_$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-      - IMAGE_TAG=${COMMIT_HASH:=latest}
+      - export IMAGE_TAG=${COMMIT_HASH:=latest}
       - IMAGE_NAME=$project_name:$IMAGE_TAG
       - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 919217319840.dkr.ecr.us-west-2.amazonaws.com
       - aws ecr describe-repositories --repository-names ${project_name} || aws ecr create-repository --repository-name ${project_name}
