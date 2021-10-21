@@ -6,6 +6,7 @@ import { RythmBinanceStreamStack } from './service-stack'
 const app = new cdk.App()
 new RythmBinanceStreamStack(app, 'RythmBinanceStreamStack', {
     stackName: 'rythm-binance-stream-stack',
+    env: { account: '919217319840', region: 'us-west-2' },
     /* If you don't specify 'env', this stack will be environment-agnostic.
      * Account/Region-dependent features and context lookups will not work,
      * but a single synthesized template can be deployed anywhere. */

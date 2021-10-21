@@ -1,0 +1,45 @@
+{
+  "vpc-provider:account=919217319840:filter.tag:Name=RythmInfrastructureStack/RythmVpc:region=us-west-2:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-0bd9057af61f4605d",
+    "vpcCidrBlock": "10.0.1.0/24",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "RythmPublic",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-010d99530e1b7e907",
+            "cidr": "10.0.1.0/26",
+            "availabilityZone": "us-west-2a",
+            "routeTableId": "rtb-0b9bdca5bea659867"
+          },
+          {
+            "subnetId": "subnet-052db9638d85584c6",
+            "cidr": "10.0.1.64/26",
+            "availabilityZone": "us-west-2b",
+            "routeTableId": "rtb-0b53ed165b8d8fc2e"
+          }
+        ]
+      },
+      {
+        "name": "RythmIsolated",
+        "type": "Isolated",
+        "subnets": [
+          {
+            "subnetId": "subnet-0271f35307e83d88d",
+            "cidr": "10.0.1.128/26",
+            "availabilityZone": "us-west-2a",
+            "routeTableId": "rtb-0158ea03b171485b1"
+          },
+          {
+            "subnetId": "subnet-04cc089da26dd75fb",
+            "cidr": "10.0.1.192/26",
+            "availabilityZone": "us-west-2b",
+            "routeTableId": "rtb-0220762106fdf6514"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -11,25 +11,8 @@ export class RythmBinanceStreamStack extends cdk.Stack {
     constructor(scope: Construct, id: string, props?: cdk.StackProps) {
         super(scope, id, props)
 
-        // testing
-        const vpc = new ec2.Vpc(this, 'RythmVpc', {
-            cidr: '10.10.10.0/24',
-            maxAzs: 2,
-            enableDnsHostnames: true,
-            enableDnsSupport: true,
-            subnetConfiguration: [
-                {
-                    name: 'Public-Subent',
-                    subnetType: ec2.SubnetType.PUBLIC,
-                    cidrMask: 26,
-                },
-                {
-                    name: 'Private-Subnet',
-                    subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
-                    cidrMask: 26,
-                },
-            ],
-            natGateways: 0,
+        const vpc = ec2.Vpc.fromLookup(this, 'RythmVpc', {
+            vpcName: 'RythmInfrastructureStack/RythmVpc',
         })
     }
 }
