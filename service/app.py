@@ -19,13 +19,16 @@ try:
     while True:
         buffer = ubwa.pop_stream_data_from_stream_buffer()
         if buffer:
+            logger.debug(buffer)
+            if not "symbol" in buffer:
+                continue
             item = {
                 "pk": buffer["symbol"],
                 "sk": buffer["trade_time"],
                 "price": buffer["price"]
             }
-            rythm_data_table.put_item(buffer)
-            logger.debug(buffer)
+            rythm_data_table.put_item(Item=item)
+
 
 except Error as e:
     logger.exception(e)
