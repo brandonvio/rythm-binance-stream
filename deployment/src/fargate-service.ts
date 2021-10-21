@@ -18,12 +18,12 @@ export class FargateService extends Construct {
     constructor(scope: Construct, id: string, props: FargateServiceProps) {
         super(scope, id)
 
-        const execRole = new iam.Role(this, 'ExecRole', {
-            roleName: 'rythm-exec-role',
+        const taskRole = new iam.Role(this, 'TaskRole', {
+            roleName: 'rythm-task-role',
             assumedBy: new iam.ServicePrincipal('ecs-tasks.amazonaws.com'),
         })
 
-        execRole.addManagedPolicy(
+        taskRole.addManagedPolicy(
             iam.ManagedPolicy.fromAwsManagedPolicyName(
                 'AmazonDynamoDBFullAccess'
             )
@@ -33,7 +33,7 @@ export class FargateService extends Construct {
             compatibility: ecs.Compatibility.FARGATE,
             cpu: '256',
             memoryMiB: '512',
-            executionRole: execRole,
+            taskRole: taskRole,
         })
 
         const ecrRepo = ecr.Repository.fromRepositoryName(
