@@ -11,9 +11,14 @@ phases:
       - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 061973135686.dkr.ecr.us-west-2.amazonaws.com
   build:
     commands:
-      - echo --working
+      # service
+      - cd $CODEBUILD_SRC_DIR/service
+      - pip install -r requirements.txt
+      - docker build -t rythm/binance-stream:$IMAGE_TAG .
+
+      # deployment
+      - cd $CODEBUILD_SRC_DIR/deployment
       - npm install
       - npm build
-      - cd $CODEBUILD_SRC_DIR/pipelines
       - cdk synth
-      - cdk deploy
+      # - cdk deploy
