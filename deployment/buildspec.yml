@@ -12,6 +12,8 @@ phases:
       - export COMMIT_HASH=SV_$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - export IMAGE_TAG=${COMMIT_HASH:=latest}
       - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 919217319840.dkr.ecr.us-west-2.amazonaws.com
+      - REPO_NAME=rythm-binance-stream
+      - aws ecr describe-repositories --repository-names ${REPO_NAME} || aws ecr create-repository --repository-name ${REPO_NAME}
   build:
     commands:
       # service
