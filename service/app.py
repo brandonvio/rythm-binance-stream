@@ -1,4 +1,3 @@
-from copy import Error
 import boto3
 import logging
 from datetime import datetime
@@ -14,13 +13,11 @@ logger.debug("rythm-binance-stream starting.")
 try:
     dynamodb_client: dynamodb_resource = boto3.resource("dynamodb", region_name="us-west-2")
     rythm_data_table = dynamodb_client.Table("rythm-data")
-
     ubwa = BinanceWebSocketApiManager(exchange="binance.us")
     ubwa.create_stream(['trade'], ['btcusdt', 'ethusdt'], output="UnicornFy")
     while True:
         buffer = ubwa.pop_stream_data_from_stream_buffer()
         if buffer:
-            logger.debug(buffer)
             if not "symbol" in buffer:
                 continue
             rythm_data_table.put_item(Item={
@@ -34,5 +31,5 @@ try:
                 "quantity": buffer["quantity"],
                 "is_market_maker": buffer["is_market_maker"],
             })
-except Error as e:
+except Exception as e:
     logger.exception(e)
