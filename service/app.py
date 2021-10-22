@@ -15,6 +15,7 @@ try:
     rythm_data_table = dynamodb_client.Table("rythm-data")
     ubwa = BinanceWebSocketApiManager(exchange="binance.us")
     ubwa.create_stream(['trade'], ['btcusdt', 'ethusdt'], output="UnicornFy")
+
     while True:
         buffer = ubwa.pop_stream_data_from_stream_buffer()
         if buffer:
