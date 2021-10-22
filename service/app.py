@@ -24,7 +24,7 @@ try:
                 continue
             item = {
                 "pk": buffer["symbol"],
-                "sk": buffer["trade_time"],
+                "sk": str(buffer["trade_time"]),
                 "price": buffer["price"]
             }
             rythm_data_table.put_item(Item=item)
