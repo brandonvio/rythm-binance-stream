@@ -22,12 +22,17 @@ try:
             logger.debug(buffer)
             if not "symbol" in buffer:
                 continue
-            item = {
+            rythm_data_table.put_item(Item={
                 "pk": buffer["symbol"],
                 "sk": str(buffer["trade_time"]),
-                "price": buffer["price"]
-            }
-            rythm_data_table.put_item(Item=item)
+                "price": buffer["price"],
+                "stream_type": buffer["stream_type"],
+                "event_type": buffer["event_type"],
+                "event_time": buffer["event_time"],
+                "trade_id": buffer["trade_id"],
+                "quantity": buffer["quantity"],
+                "is_market_maker": buffer["is_market_maker"],
+            })
 
 
 except Error as e:
