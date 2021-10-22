@@ -1,8 +1,9 @@
 from copy import Error
 import boto3
 import logging
+from datetime import datetime
 from unicorn_binance_websocket_api.unicorn_binance_websocket_api_manager import BinanceWebSocketApiManager
-from mypy_boto3_dynamodb import DynamoDBClient, ServiceResource as dynamodb_resource
+from mypy_boto3_dynamodb import ServiceResource as dynamodb_resource
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -24,7 +25,7 @@ try:
                 continue
             rythm_data_table.put_item(Item={
                 "pk": buffer["symbol"],
-                "sk": str(buffer["trade_time"]),
+                "sk": datetime.utcfromtimestamp(buffer["trade_time"]/1000).isoformat(),
                 "price": buffer["price"],
                 "stream_type": buffer["stream_type"],
                 "event_type": buffer["event_type"],
@@ -33,7 +34,5 @@ try:
                 "quantity": buffer["quantity"],
                 "is_market_maker": buffer["is_market_maker"],
             })
-
-
 except Error as e:
     logger.exception(e)
