@@ -31,8 +31,8 @@ export class FargateService extends Construct {
 
         const taskDef = new ecs.TaskDefinition(this, 'TaskDef', {
             compatibility: ecs.Compatibility.FARGATE,
-            cpu: '256',
-            memoryMiB: '512',
+            cpu: '512',
+            memoryMiB: '1024',
             taskRole: taskRole,
         })
 
