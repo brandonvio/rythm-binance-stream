@@ -51,7 +51,6 @@ ws.on('message', async function incoming(message) {
                 is_market_maker: data['m'],
             },
         }
-        console.log(params)
         const result = await documentClient.put(params).promise()
     } catch (error) {
         console.log(error)
