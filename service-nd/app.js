@@ -13,37 +13,16 @@ ws.on('open', function open() {
     console.log('Service started.')
 })
 
-/*
-2021-10-23T08:18:28.087-06:00	E: 1634998708037,
-
-2021-10-23T08:18:28.087-06:00	s: 'BTCUSDT',
-
-2021-10-23T08:18:28.087-06:00	t: 1112113956,
-
-2021-10-23T08:18:28.087-06:00	p: '61224.64000000',
-
-2021-10-23T08:18:28.087-06:00	q: '0.01113000',
-
-2021-10-23T08:18:28.087-06:00	b: 8018672923,
-
-2021-10-23T08:18:28.087-06:00	a: 8018672887,
-
-2021-10-23T08:18:28.087-06:00	T: 1634998708036,
-
-2021-10-23T08:18:28.087-06:00	m: false,
-
-2021-10-23T08:18:28.087-06:00	M: true
-*/
-
 ws.on('message', async function incoming(message) {
     try {
         const msg = JSON.parse(message.toString())
         const data = msg.data
+
         var params = {
             TableName: 'rythm-data',
             Item: {
                 pk: data['s'],
-                sk: data['T'].toString(),
+                sk: getUTCDateTime(data['T']),
                 price: data['p'],
                 event_time: data['E'],
                 trade_id: data['t'],
@@ -52,7 +31,14 @@ ws.on('message', async function incoming(message) {
             },
         }
         const result = await documentClient.put(params).promise()
+        console.log(params)
     } catch (error) {
         console.log(error)
     }
 })
+
+function getUTCDateTime(epochTime) {
+    const d = new Date(0)
+    d.setUTCMilliseconds(epochTime)
+    return d.toISOString()
+}
