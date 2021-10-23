@@ -31,7 +31,7 @@ ws.on('message', async function incoming(message) {
             },
         }
         const result = await documentClient.put(params).promise()
-        console.log(params)
+        // console.log(params)
     } catch (error) {
         console.log(error)
     }
