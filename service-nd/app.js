@@ -52,7 +52,7 @@ ws.on('message', async function incoming(message) {
             },
         }
         console.log(params)
-        const result = await documentClient.putItem(params)
+        const result = await documentClient.put(params).promise()
     } catch (error) {
         console.log(error)
     }
