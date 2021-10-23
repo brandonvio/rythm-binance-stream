@@ -6,6 +6,7 @@ import * as logs from 'aws-cdk-lib/aws-logs'
 import * as ecs from 'aws-cdk-lib/aws-ecs'
 import * as ec2 from 'aws-cdk-lib/aws-ec2'
 import { Construct } from 'constructs'
+import * as constants from './lib/constants'
 
 interface FargateServiceProps {
     readonly serviceName: string
@@ -31,8 +32,8 @@ export class FargateService extends Construct {
 
         const taskDef = new ecs.TaskDefinition(this, 'TaskDef', {
             compatibility: ecs.Compatibility.FARGATE,
-            cpu: '512',
-            memoryMiB: '1024',
+            cpu: constants.FargateCpu.Cpu512,
+            memoryMiB: constants.FargateMiB.Mem1024,
             taskRole: taskRole,
         })
 
