@@ -2,12 +2,12 @@ const WS = require('ws')
 const AWS = require('aws-sdk')
 
 try {
-    const documentClient = new AWS.DynamoDB.DocumentClient({
-        region: 'us-west-2',
-    })
+    // const documentClient = new AWS.DynamoDB.DocumentClient({
+    //     region: 'us-west-2',
+    // })
 
     const url =
-        'wss://stream.binance.com:9443/stream?streams=btcusdt@trade/ethusdt@trade'
+        'wss://stream.binance.com:9443/stream?streams=btcusdt@trade/ethusdt@trade/dogeusdt@trade'
     const ws = new WS.WebSocket(url)
 
     ws.on('open', function open() {
@@ -31,8 +31,8 @@ try {
                     is_market_maker: data['m'],
                 },
             }
-            const result = await documentClient.put(params).promise()
-            // console.log(params)
+            // const result = await documentClient.put(params).promise()
+            console.log(params)
         } catch (error) {
             console.log(error)
         }
