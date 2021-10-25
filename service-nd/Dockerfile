@@ -1,4 +1,4 @@
-FROM node:17.0.1-bullseye-slim
+FROM 919217319840.dkr.ecr.us-west-2.amazonaws.com/node-17-bullseye-slim:latest
 
 WORKDIR /app
 COPY . .
