@@ -31,8 +31,9 @@ try {
                     is_market_maker: data['m'],
                 },
             }
+            console.log(JSON.stringify(params, null, 2))
             const result = await documentClient.put(params).promise()
-            // console.log(params)
+            // console.log(JSON.stringify(result, null, 2))
         } catch (error) {
             console.log(error)
         }
