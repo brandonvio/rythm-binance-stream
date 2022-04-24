@@ -19,7 +19,7 @@ try {
             const msg = JSON.parse(message.toString())
             const data = msg.data
 
-            var params = {
+            const params = {
                 TableName: 'rythm-data',
                 Item: {
                     pk: data['s'],
@@ -31,7 +31,7 @@ try {
                     is_market_maker: data['m'],
                 },
             }
-            console.log(JSON.stringify(params, null, 2))
+            // console.log(JSON.stringify(params, null, 2))
             const result = await documentClient.put(params).promise()
             // console.log(JSON.stringify(result, null, 2))
         } catch (error) {
